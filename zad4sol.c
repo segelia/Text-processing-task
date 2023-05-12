@@ -2,28 +2,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char *get_line()
-{
+char* get_line() {
     char symbol;
-    char *buf = NULL;
+    char* buf = NULL;
     int len = 0;
+    int is_newline = 0;
 
-    while ((symbol = getchar()) != '\n')
-    {
-        if (symbol == EOF){
-            buf = realloc(buf, sizeof(char) * (len + 1));
-            buf[len] = '\0';
-            return buf;
+    while ((symbol = getchar()) != EOF) {
+        if (symbol == '\n') {
+            is_newline = 1;
+            break;
         }
-        buf = realloc(buf, sizeof(char) * ++len);
-        buf[len - 1] = symbol;
+        buf = realloc(buf, sizeof(char) * (len + 1));
+        buf[len++] = symbol;
     }
 
-    //save the memory location of newline
+    if (!is_newline && len == 0) {
+        return NULL;
+    }
 
-    return buf;
+    buf = realloc(buf, sizeof(char) * (len + 1));
+    buf[len] = '\0';
+
+    return is_newline ? buf : NULL;
 }
+
 
 void print_line(buf){
     
+}
+
+int main(){
+    int first_el_address = get_line();
+    printf("%d",first_el_address);
 }

@@ -2,10 +2,10 @@
 headers = rand_malloc.h
 
 # List your *.c files:
-sources = textprocessing.c rand_malloc.c
+sources = zad4sol.c rand_malloc.c
 
 # Specify name of your program:
-executable = textprocessing
+executable = zad4sol
 
 $(executable): $(headers) $(sources)
 	gcc -g -Wall -pedantic $(sources) -o $(executable)
