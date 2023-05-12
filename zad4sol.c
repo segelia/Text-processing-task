@@ -2,14 +2,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char* get_line() {
+char *get_line()
+{
     char symbol;
-    char* buf = NULL;
+    char *buf = NULL;
     int len = 0;
     int is_newline = 0;
 
-    while ((symbol = getchar()) != EOF) {
-        if (symbol == '\n') {
+    while ((symbol = getchar()) != EOF)
+    {
+        if (symbol == '\n')
+        {
             is_newline = 1;
             break;
         }
@@ -17,7 +20,8 @@ char* get_line() {
         buf[len++] = symbol;
     }
 
-    if (!is_newline && len == 0) {
+    if (!is_newline && len == 0)
+    {
         return NULL;
     }
 
@@ -27,12 +31,17 @@ char* get_line() {
     return is_newline ? buf : NULL;
 }
 
-
-void print_line(buf){
-    
+void print_line(char *buf)
+{
+    if (buf != NULL)
+    {
+        printf("%s\n", buf);
+    }
 }
 
-int main(){
-    int first_el_address = get_line();
-    printf("%d",first_el_address);
+int main()
+{
+    char *buf = get_line();
+    print_line(buf);
+    free(buf);
 }
