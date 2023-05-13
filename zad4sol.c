@@ -10,7 +10,13 @@ char *get_line()
 
     while ((symbol = getchar()) != EOF)
     {
+        // checking for realloc overflow (add here)
         buf = realloc(buf, sizeof(char) * (len + 1));
+        if (buf == NULL) //in case realloc is not sucessful and it returns null
+        {
+            printf("reallloc failed");
+            exit(1);
+        }
         buf[len++] = symbol;
     }
 
@@ -25,16 +31,12 @@ char *get_line()
     return buf;
 }
 
-void print_line(char *buf)
-{
-    if (buf != NULL)
-    {
-        int printing = 1;
-        while (printing){
-            if (buf == '\n'){
-                printf("\n");
-            }
-        }
+void reverse_line(char *buf){
+
+}
+
+void print_line(char* buf) {
+    if (buf != NULL) {
         printf("%s\n", buf);
     }
 }
