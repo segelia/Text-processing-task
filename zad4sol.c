@@ -7,20 +7,14 @@ char *get_line()
     char symbol;
     char *buf = NULL;
     int len = 0;
-    int is_newline = 0;
 
     while ((symbol = getchar()) != EOF)
     {
-        if (symbol == '\n')
-        {
-            is_newline = 1;
-            break;
-        }
         buf = realloc(buf, sizeof(char) * (len + 1));
         buf[len++] = symbol;
     }
 
-    if (!is_newline && len == 0)
+    if (EOF && len == 0)
     {
         return NULL;
     }
@@ -28,13 +22,19 @@ char *get_line()
     buf = realloc(buf, sizeof(char) * (len + 1));
     buf[len] = '\0';
 
-    return is_newline ? buf : NULL;
+    return buf;
 }
 
 void print_line(char *buf)
 {
     if (buf != NULL)
     {
+        int printing = 1;
+        while (printing){
+            if (buf == '\n'){
+                printf("\n");
+            }
+        }
         printf("%s\n", buf);
     }
 }
